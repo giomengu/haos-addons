@@ -1,0 +1,20 @@
+# Secrets and runtime state
+.env
+.env.*
+!.env.example
+**/site_config.json
+**/common_site_config.json
+**/sites/.haos/
+**/private/backups/
+**/private/files/
+**/public/files/
+*.sql
+*.sql.gz
+*.sql.xz
+*.bak
+*.tar.gz
+*.tgz
+*.zip
+__pycache__/
+*.pyc
+.DS_Store
