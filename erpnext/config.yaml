@@ -1,0 +1,30 @@
+name: ERPNext (All-in-One, ARM64)
+slug: erpnext
+version: 0.1.12
+description: ERPNext v16 with MariaDB, Redis, workers, Nginx and optional Frappe Studio
+url: https://github.com/giomengu/haos-addons
+arch:
+  - aarch64
+init: false
+startup: services
+boot: auto
+stage: experimental
+backup: cold
+ports:
+  8080/tcp: 8089
+ports_description:
+  8080/tcp: ERPNext web interface (migration instance)
+webui: http://[HOST]:[PORT:8080]
+map:
+  - type: data
+    path: /home/frappe/frappe-bench/sites
+options:
+  admin_password: CHANGE_ME
+  developer_mode: true
+  remove_builder: false
+  enable_studio: false
+schema:
+  admin_password: password
+  developer_mode: bool
+  remove_builder: bool
+  enable_studio: bool
