@@ -1,19 +1,23 @@
-# AlphaNav Weather
+# Alpha Lyrae Design — Home Assistant Add-ons
 
-A weather hub for Home Assistant: it takes the forecasts you ask for, shows them on a map, sends daily alerts to
-your phone and cuts small files for the boat.
+Home Assistant add-on repository for AlphaNav Weather and the upcoming ERPNext / ALD Engineering app.
 
 ## Install
+In Home Assistant, open **Settings → Apps → Install app → ⋮ → Repositories** and add:
 
-1. Settings, Add-ons, Add-on Store, the menu at the top right, Repositories.
-2. Add `https://github.com/giomengu/alphanav-weather-addon`.
-3. Install AlphaNav Weather, start it, and turn on Show in sidebar.
+`https://github.com/giomengu/haos-addons`
 
-For `amd64` and `aarch64` machines.
+## Add-ons
+- **AlphaNav Weather** — existing weather add-on, still in its original folder; a clean reinstall is acceptable.
+- **ERPNext / ALD Engineering** — [staging and migration instructions](erpnext/README.md). **Not yet installable from this repository.** The running local ERPNext add-on and its data are untouched.
 
-## Who sees what
+## Security and access
+- Keep ERPNext's own login and role permissions; Home Assistant ingress is not a substitute for ERPNext authentication.
+- Do not publish the ERPNext port directly to the Internet. Use an authenticated HTTPS reverse proxy.
+- Store database dumps, site encryption keys, passwords and access tokens outside Git.
+- Preserve the existing ERPNext data using both a cold HAOS backup and a native Frappe backup before installing a new add-on identity.
 
-Through Home Assistant's sidebar you are the admin. On port 3010 anyone who can reach it sees the map and the
-forecasts on it, and nothing else; the boat needs a key, made in Access, and every setting needs the admin key,
-which the add-on's log shows once on the first start. To put port 3010 online, put it behind HTTPS: keys travel
-in the clear without it, and a browser gives its position only to a secure page.
+## Operations
+See [ERPNext migration](erpnext/MIGRATION.md) and [backup and access plan](erpnext/OPERATIONS.md).
+
+The repository rename does not migrate the installed local ERPNext add-on's data.
