@@ -1,5 +1,5 @@
 name: AlphaNav Weather
-version: "1.0.4"
+version: "1.0.5"
 slug: alphanav_weather
 description: Checks weather sources, takes the forecasts you ask for and cuts them small for the boat.
 url: https://github.com/giomengu/alphanav-weather-addon
