@@ -1,12 +1,21 @@
-# ERPNext / ALD Engineering — staging
+# ERPNext v0.1.12 — HAOS add-on (experimental)
 
-The running Home Assistant installation is currently the **local** add-on `local_erpnext` (slug `erpnext`, version `0.1.11`).
+The GitHub-hosted ERPNext add-on is now published with `config.yaml`, `Dockerfile`, `startup.py`, and `supervisord.conf`. It uses ERPNext v16.53.0, MariaDB, Redis, Frappe workers, Nginx, and optional Frappe Studio.
 
-**Do not install a second ERPNext add-on yet.** The new GitHub-hosted add-on will have a different full identifier and a separate data directory. This folder is staging documentation; it is not an installable add-on until its verified `config.yaml`, Dockerfile, startup scripts, and custom app have been published and tested.
+**Not yet built or smoke-tested.** The current source has been published to allow Home Assistant discovery. Installation may involve a lengthy local Docker build and may expose build errors.
 
-- [Native backup/restore migration](MIGRATION.md)
-- [Maintenance, access and security requirements](OPERATIONS.md)
+## Parallel installation and safety
 
-The desired ALD Engineering application will host the relative scheduling engine. Keep it disabled for production projects until the pilot tests pass.
+- Existing local ERPNext: `local_erpnext`, port **8088**, data remains untouched.
+- New repository ERPNext: separate add-on identity, port **8089**, separate persistent data.
+- **Do not uninstall or overwrite the local ERPNext add-on.**
+- Set a unique strong `admin_password` (minimum 12 characters) in the new add-on configuration before starting it. The default `CHANGE_ME` intentionally prevents startup.
+- Do not configure the reverse proxy to point to the new instance until after native Frappe restore and verification.
 
-Never commit database dumps, passwords, site configuration with secrets or encryption keys.
+## Future releases
+
+The ALD Engineering scheduling app and administrator-only native backup button are staged for later releases, **not enabled in v0.1.12**. The files in `ald_engineering/` are development sources only.
+
+See [native migration plan](MIGRATION.md) and [maintenance/access design](OPERATIONS.md).
+
+**No database migration or backup has been performed.**
