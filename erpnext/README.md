@@ -1,9 +1,12 @@
-# ERPNext / ALD Engineering (staging)
+# ERPNext / ALD Engineering — staging
 
-This directory is reserved for the existing HAOS ERPNext add-on (currently local slug `erpnext`, version `0.1.11`). The add-on is **not yet published here**. Do not install a second ERPNext instance until a native Frappe backup and a verified restore procedure are ready.
+The running Home Assistant installation is currently the **local** add-on `local_erpnext` (slug `erpnext`, version `0.1.11`).
 
-Target layout: `config.yaml`, `Dockerfile`, `startup.py`, `supervisord.conf`, optional Studio/Kanban assets, and `ald_engineering/`.
+**Do not install a second ERPNext add-on yet.** The new GitHub-hosted add-on will have a different full identifier and a separate data directory. This folder is staging documentation; it is not an installable add-on until its verified `config.yaml`, Dockerfile, startup scripts, and custom app have been published and tested.
 
-Keep database and Frappe site data out of Git. Do not commit `site_config.json`, database dumps, backup archives, passwords or encryption keys.
+- [Native backup/restore migration](MIGRATION.md)
+- [Maintenance, access and security requirements](OPERATIONS.md)
 
-See [MIGRATION.md](MIGRATION.md) for the staged migration plan.
+The desired ALD Engineering application will host the relative scheduling engine. Keep it disabled for production projects until the pilot tests pass.
+
+Never commit database dumps, passwords, site configuration with secrets or encryption keys.
