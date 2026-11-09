@@ -1,5 +1,5 @@
 FROM frappe/erpnext:v16.53.0
-ARG BUILD_VERSION=0.1.15
+ARG BUILD_VERSION=0.1.16
 ARG BUILD_ARCH=aarch64
 LABEL io.hass.version="${BUILD_VERSION}" io.hass.type="addon" io.hass.arch="${BUILD_ARCH}"
 USER root
