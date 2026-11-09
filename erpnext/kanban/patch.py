@@ -57,8 +57,5 @@ if 'Kanban: { name: "Kanban"' not in c:
     anchor = 'export const COMPONENTS: FrappeUIComponents = {'
     if anchor not in c: raise RuntimeError("Studio component catalog anchor missing")
     c = c.replace(anchor, anchor + '\n\tKanban: { name: "Kanban", title: "Kanban", icon: LucideColumns3, initialState: { doctype: "", statusField: "status", titleField: "name", columns: "Open,Working,Completed", limit: 100 } },', 1)
-if 'import LucideColumns3 from "~icons/lucide/columns-3"' not in c:
-    anchor = 'export const COMPONENTS: FrappeUIComponents = {'
-    c = c.replace(anchor, 'import LucideColumns3 from "~icons/lucide/columns-3"\n\n' + anchor, 1)
 components.write_text(c)
 print("ALD Kanban registrations installed.")
