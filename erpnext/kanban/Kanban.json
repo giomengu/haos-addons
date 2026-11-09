@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/KanbanProps",
+  "definitions": {
+    "KanbanProps": {
+      "type": "object",
+      "properties": {
+        "doctype": {
+          "type": "string"
+        },
+        "statusField": {
+          "type": "string"
+        },
+        "titleField": {
+          "type": "string"
+        },
+        "columns": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
