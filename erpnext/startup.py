@@ -300,6 +300,7 @@ def configure_frappe():
         ('set-config', '-g', 'redis_cache', 'redis://127.0.0.1:6379'),
         ('set-config', '-g', 'redis_queue', 'redis://127.0.0.1:6380'),
         ('set-config', '-g', 'redis_socketio', 'redis://127.0.0.1:6380'),
+        ('set-config', '-gp', 'webserver_port', '8000'),
         ('set-config', '-gp', 'socketio_port', '9000'),
     ]:
         frappe_bench(*args)
