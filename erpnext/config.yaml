@@ -1,6 +1,6 @@
 name: ERPNext (All-in-One, ARM64)
 slug: erpnext
-version: 0.1.15
+version: 0.1.16
 description: ERPNext v16 with MariaDB, Redis, workers, Nginx and optional Frappe Studio
 url: https://github.com/giomengu/haos-addons
 arch:
