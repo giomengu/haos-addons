@@ -138,6 +138,10 @@ def prepare():
     if not isinstance(developer_mode, bool):
         fatal('developer_mode must be true or false in Home Assistant app configuration.')
 
+    enable_server_scripts = opts.get('enable_server_scripts', True)
+    if not isinstance(enable_server_scripts, bool):
+        fatal('enable_server_scripts must be true or false')
+
     # Never recursively chown sites on a restart: it also contains MariaDB's
     # independently owned database files and Redis's persistent queue files.
     owner(SITES, 'frappe', 0o755)
@@ -241,7 +245,7 @@ def prepare():
         log('Initializing local MariaDB database (one-time operation)')
         run(['mariadb-install-db', '--user=mysql', f'--datadir={MYSQL}',
              '--skip-test-db'])
-    return admin_password, developer_mode, remove_builder, enable_studio
+    return admin_password, developer_mode, remove_builder, enable_studio, enable_server_scripts
 
 
 def secret_value():
@@ -394,9 +398,19 @@ def configure_developer_mode(enabled):
     log(f'Frappe developer mode {"ENABLED" if enabled else "DISABLED"}')
 
 
+def configure_server_scripts(enabled):
+    value = 'true' if enabled else 'false'
+    log(f'Setting server_script_enabled={value} on site {SITE}')
+    frappe_bench('--site', SITE, 'set-config', 'server_script_enabled', value)
+    frappe_bench('--site', SITE, 'clear-cache')
+    effective = json.loads((SITES / SITE / 'site_config.json').read_text())
+    if effective.get('server_script_enabled') is not enabled:
+        fatal('Server Scripts setting was not saved correctly')
+
+
 def main():
     log('Starting ERPNext v16 (experimental HAOS package)')
-    admin_password, developer_mode, remove_builder, enable_studio = prepare()
+    admin_password, developer_mode, remove_builder, enable_studio, enable_server_scripts = prepare()
     db_password = secret_value()
 
     os.environ.update({
@@ -451,6 +465,7 @@ def main():
         ensure_site(admin_password, db_password)
         reconcile_apps(remove_builder, enable_studio)
         configure_developer_mode(developer_mode)
+        configure_server_scripts(enable_server_scripts)
 
         log('Starting API, websocket, queues, scheduler and Nginx')
         for service in ('backend', 'websocket', 'queue-short',
